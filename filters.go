@@ -36,3 +36,15 @@ func NoBrFilter(content string) string {
 	}
 	return strings.Join(paragraphs, "\n\n")
 }
+
+// BrFilter removes single CR and LF from content.
+func BrFilter(content string) string {
+	normalized := strings.Replace(content, "\r\n", "\n", -1)
+	paragraphs := multiNewlinePattern.Split(normalized, -1)
+	for i, p := range paragraphs {
+		withoutCR := strings.Replace(p, "\r", " ", -1)
+		withoutLF := strings.Replace(withoutCR, "\n", " ", -1)
+		paragraphs[i] = spacePattern.ReplaceAllString(withoutLF, " ")
+	}
+	return strings.Join(paragraphs, "<br />")
+}
