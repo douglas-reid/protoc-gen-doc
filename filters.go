@@ -46,5 +46,5 @@ func BrFilter(content string) string {
 		withoutLF := strings.Replace(withoutCR, "\n", " ", -1)
 		paragraphs[i] = spacePattern.ReplaceAllString(withoutLF, " ")
 	}
-	return strings.Join(paragraphs, "")
+	return strings.Join(paragraphs, "  ")
 }
